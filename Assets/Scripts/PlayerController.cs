@@ -5,14 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D Rigidbody;
+    public GameObject GameWonPanel;
     public float speed;
+    private bool isGameWon = false;
    
-    // Start is called before the first frame update
-   
-
-    // Update is called once per frame
     void Update()
     {
+      if(isGameWon == true)
+      {
+        return;
+      }
         if(Input.GetAxis("Horizontal") > 0 )
         {
             Rigidbody.velocity = new Vector2(speed, 0f);
@@ -40,6 +42,8 @@ public class PlayerController : MonoBehaviour
     {
         if(other.tag == "Door")
          Debug.Log("Level Complete!!!");
+         GameWonPanel.SetActive(true);
+         isGameWon = true;
     }
 
 }
